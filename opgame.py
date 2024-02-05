@@ -32,6 +32,8 @@ class Vehicle:
         x_path=[133,190,255,310,380,435,490,540,595,]
         self.x=(random.choice(x_path))
         self.lorry = pygame.transform.scale(pygame.image.load(random.choice(vehicle_path)), (128, 128))
+        list1=[]
+        list1.append(random.choice(vehicle_path))
         self.y=y
         self.vel=velocity
         self.acc = acceleration + 0.05
@@ -45,7 +47,7 @@ class Vehicle:
 
 player=Race_car(175)
 
-disturbance=[Vehicle(-128),]*9
+disturbance=Vehicle(-128)
 
 while run:
 
@@ -71,11 +73,16 @@ while run:
     if count==1:
         print("sriram")
         temp+=1
-        for i in range(9):
+        # for i in range(9):
 
-            disturbance[i].move(0)
-            if(disturbance[i].y>860):
-                disturbance[i] = Vehicle(-128)
+        disturbance.move(0)
+        if(disturbance.y>860):
+            disturbance = Vehicle(-128)
+
+            #     if(disturbance[i] in list1):
+            #         pass
+            # else:
+            #     disturbance[i] = Vehicle(-128)
 
 
 
