@@ -5,10 +5,11 @@ clock=pygame.time.Clock()
 win = pygame.display.set_mode((840,650))
 back=pygame.transform.scale(pygame.image.load("background-1.png"),(840,650))
 rc=pygame.transform.scale(pygame.image.load("Black_viper.png"),(128,128))
-vehicle_path=["final truck.png",]
-lorry=pygame.transform.scale(pygame.image.load(random.choice(vehicle_path)),(128,128))
-q=0
+vehicle_path=["final truck.png","Ambulance.png","final car.png","Mini_van final.png","Police final.png","taxi.png"]
 
+q=0
+count=1
+temp=0
 bgY=0
 acceleration = 0.1
 velocity = 2
@@ -22,18 +23,21 @@ class Race_car:
         self.vel=5
     def move(self,inp):
         win.blit(rc,(self.x,530))
-        if inp[pygame.K_LEFT] and self.x>145:
+        if inp[pygame.K_LEFT] and self.x>150:
             self.x-=self.vel
-        elif inp[pygame.K_RIGHT] and self.x<580:
+        elif inp[pygame.K_RIGHT] and self.x<575:
             self.x+=self.vel
 class Vehicle:
     def __init__(self,y):
-        self.x=(random.randint(29,116))*5
+        x_path=[133,190,255,310,380,435,490,540,595,]
+        self.x=(random.choice(x_path))
+        self.lorry = pygame.transform.scale(pygame.image.load(random.choice(vehicle_path)), (128, 128))
         self.y=y
         self.vel=velocity
         self.acc = acceleration + 0.05
     def move(self,y):
-        win.blit(lorry,(self.x,self.y))
+
+        win.blit(self.lorry,(self.x,self.y))
         self.y+=self.vel
         if self.vel<maxspeed:
             self.vel+=self.acc
@@ -41,7 +45,7 @@ class Vehicle:
 
 player=Race_car(175)
 
-disturbance=Vehicle(100)
+disturbance=[Vehicle(-128),]*9
 
 while run:
 
@@ -51,10 +55,12 @@ while run:
     win.blit(back,(0,bgY))
     win.blit(back,(0,bgY-650))
 
+
+
     bgY+=velocity
     if velocity<maxspeed:
         velocity+=acceleration
-    if bgY>=649.9:   
+    if bgY>=649.9:
         bgY=0
 
 
@@ -62,7 +68,16 @@ while run:
         if event.type==pygame.QUIT:
             run=0
     player.move(inp)
-    disturbance.move(0)
+    if count==1:
+        print("sriram")
+        temp+=1
+        for i in range(9):
+
+            disturbance[i].move(0)
+            if(disturbance[i].y>860):
+                disturbance[i] = Vehicle(-128)
+
+
 
 
     pygame.display.update()
