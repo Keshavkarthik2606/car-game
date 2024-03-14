@@ -82,9 +82,10 @@ coin.surr.x=(random.choice(coin_path))
 coin.surr.y=-128
 coin_mask = pygame.mask.from_surface(coin.img)
 c=1
+"""
 mixer.music.load("Teriyaki Boyz - Tokyo Drift Instrumental [ 1 Hour ].mp3")
 mixer.music.play()
-
+"""
 while run:
 
     win.blit(back_end, (0, 0))
